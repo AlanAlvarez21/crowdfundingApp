@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.17;
 
-contract Crowdfunding {
+contract CrowdFunding {
     struct Campaign {
         address owner;
         string title;
@@ -13,12 +13,12 @@ contract Crowdfunding {
         address[] donators;
         uint256[] donations;
     }
-    
+
     mapping(uint256 => Campaign) public campaigns;
 
     uint256 public numberOfCampaigns = 0;
 
-    function createCampaign(address _owner,string memory _title,string memory _description,uint256 _target,uint256 _deadline,string memory _image) public returns(uint256) {
+    function createCampaign(address _owner, string memory _title, string memory _description, uint256 _target, uint256 _deadline, string memory _image) public returns (uint256) {
         Campaign storage campaign = campaigns[numberOfCampaigns];
 
         require(campaign.deadline < block.timestamp, "The deadline should be a date in the future.");
@@ -30,12 +30,12 @@ contract Crowdfunding {
         campaign.deadline = _deadline;
         campaign.amountCollected = 0;
         campaign.image = _image;
-        
+
         numberOfCampaigns++;
 
-        return numberOfCampaigns -1;
+        return numberOfCampaigns - 1;
     }
-    
+
     function donateToCampaign(uint256 _id) public payable {
         uint256 amount = msg.value;
 
@@ -44,9 +44,9 @@ contract Crowdfunding {
         campaign.donators.push(msg.sender);
         campaign.donations.push(amount);
 
-        (bool sent, ) = payable(campaign.owner).call{value: amount}("");
+        (bool sent,) = payable(campaign.owner).call{value: amount}("");
 
-        if (sent){
+        if(sent) {
             campaign.amountCollected = campaign.amountCollected + amount;
         }
     }
@@ -58,7 +58,7 @@ contract Crowdfunding {
     function getCampaigns() public view returns (Campaign[] memory) {
         Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
 
-        for(uint i=0; i < numberOfCampaigns; i++) {
+        for(uint i = 0; i < numberOfCampaigns; i++) {
             Campaign storage item = campaigns[i];
 
             allCampaigns[i] = item;
@@ -66,5 +66,4 @@ contract Crowdfunding {
 
         return allCampaigns;
     }
-
 }
