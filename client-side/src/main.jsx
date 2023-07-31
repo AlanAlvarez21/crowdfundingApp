@@ -10,7 +10,8 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <ThirdwebProvider desiredChainId={ChainId.Goerli}> 
+  // 0xaa36a7 -> sepolia chainID in Hex
+  <ThirdwebProvider desiredChainId={ChainId.Sepolia}> 
     <Router>
       {/* <StateContextProvider> */}
         <App />
