@@ -9,17 +9,23 @@ import { checkIfImage } from '../utils'
 const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState(false);
-  const [form, setform] = useState({
+  const [form, setForm] = useState({
     name: '',
     title: '',
     description: '',
     target: '',
     deadline: '',
-    image: '',
+    image: '', 
   });
 
-  const handleSubmit = () => {
+  const handleFormFieldChange = (fieldName, e) => {
+    setForm({ ...form, [fieldName]: e.target.value })
+  }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(form);
   }
 
   return (
@@ -31,21 +37,21 @@ const CreateCampaign = () => {
         </h1>
       </div>
 
-      <form onSubmit={handleSubmit} className="w-full mt-[60px] flex flex-col gap-[30px]">
+      <form onSubmit={handleSubmit} className="w-full mt-[65px] flex flex-col gap-[30px]">
         <div className="flex flex-wrap gap-[40px]">
           <FormField 
             labelName='Your Name *'
             placeholder='Alan Alvarez'
             inputType='text'
             value={form.name}
-            handleChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('name', e)}
           />
           <FormField 
             labelName='Campaign Title *'
             placeholder='Write a title'
             inputType='text'
             value={form.title}
-            handleChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('title', e)}
           />
         </div>
         <FormField 
@@ -53,7 +59,7 @@ const CreateCampaign = () => {
             placeholder='Write your story'
             isTextArea
             value={form.description}
-            handleChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('description', e)}
           />
 
           <div className='flex items-center justify-start w-full p-4 bg-[#8c6dfd] rounded-[10px]'>
@@ -66,14 +72,21 @@ const CreateCampaign = () => {
             placeholder='ETH 0.50'
             inputType='text'
             value={form.target}
-            handleChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('target', e)}
           />
           <FormField 
             labelName='End Date *'
             placeholder='End Date'
             inputType='date'
             value={form.deadline}
-            handleChange={() => {}}
+            handleChange={(e) => handleFormFieldChange('deadline', e)}
+          />
+          <FormField 
+            labelName='Campaign image *'
+            placeholder='Place image URL of your campaign'
+            inputType='url'
+            value={form.image}
+            handleChange={(e) => handleFormFieldChange('image', e)}
           />
           <div className='flex justify-center flex-wrap items-center mt-[30px]'>
             <CustomButton 
