@@ -21,13 +21,13 @@ const Navbar = () => {
 
       <div className="flex-row justify-end hidden gap-4 sm:flex">
         <CustomButton 
-        btnType="button"
-        title={address ? "Create a campaign" : "Connect"}
-        styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
-        hanfleClick={() => { 
-          if(address) navigate('create-campaign')
-          else 'connect()'
-        }}
+          btnType="button"
+          title={address ? 'Create a campaign' : 'Connect'}
+          styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
+          handleClick={() => {
+            if(address) navigate('create-campaign')
+            else 'connect()'
+          }}
         />
 
       <Link to="/profile">
