@@ -35,9 +35,9 @@ export const StateContextProvider = ({ children }) => {
         const parsedCampaings = campaigns.map((campaing, i) => ({
             owner: campaing.owner,
             title: campaing.title,
-            description: campaing.owner,
+            description: campaing.description,
             target: ethers.utils.formatEther(campaing.target.toString()),
-            deadline: campaing.deadline.toNumber,
+            deadline: campaing.deadline.toNumber(),
             amountCollected: ethers.utils.formatEther(campaing.amountCollected.toString()),
             image: campaing.image,
             pId: i
