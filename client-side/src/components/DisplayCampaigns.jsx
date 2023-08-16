@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 const DisplayCampaigns = ({ title, isLoading, campaings}) => {
   const navigate = useNavigate();
   const handleNavigate = (campaing) => {
-    navigate(`/campaign-details/${campaign.title}`, { state: campaign })
+    navigate(`/campaign-details/${campaing.title}`, { state: campaing })
   }
 
   return (
