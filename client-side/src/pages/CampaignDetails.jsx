@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ethers } from 'ethers'
 
 import { useStateContext } from '../context';
-import { CustomButton, CountBox } from '../components';
+import { CustomButton, CountBox, Loader } from '../components';
 import { calculateBarPercentage, daysLeft } from '../utils';
 import { thirdweb } from '../assets';
 
 const CampaignDetails = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const { getDonations, contract, address, donate } = useStateContext();
 
   const [isLoading, setIsLoading ] = useState(false);
@@ -31,12 +32,13 @@ const CampaignDetails = () => {
 
     await donate(state.pId, amount);
 
+    navigate('/');
     setIsLoading(false);
   }
 
   return (
     <div>
-    { isLoading && 'Loadind...'}
+    { isLoading && <Loader /> }
       <div className='w-full flex md:flex-row flex-col mt-10 gap[30px]'>
         <div className='flex-col flex-1'>
           <img src={state.image} alt='campaign' className='w-full h-[410px] object-cover rounded-xl'/>
@@ -76,14 +78,18 @@ const CampaignDetails = () => {
           </div>
 
           <div>
-            <h4 className='font-semibold text-white font-epilogue text-[18px] uppercase' >Donators</h4>
-            <div className='mt-[20px] flex flex-col gap-4'>
-              {donators.length > 0 ? donators.map((donator, index) => (
-                <div key={`item.dontor}-${index}`}>Donator</div>
-              )): (
-              <p className='mt-[4px] font-epilogue font-normal text-[16px] text-[#808181] leading-[26px] text-justify'>No donators yet, Be the first one!</p>
-              )}
-            </div>
+            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Donators</h4>
+
+              <div className="mt-[20px] flex flex-col gap-4">
+                {donators.length > 0 ? donators.map((item, index) => (
+                  <div key={`${item.donator}-${index}`} className="flex items-center justify-between gap-4">
+                    <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
+                    <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p>
+                  </div>
+                )) : (
+                  <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donators yet. Be the first one!</p>
+                )}
+              </div>
           </div>
         </div>
 
