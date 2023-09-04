@@ -12,6 +12,9 @@ import menu from './menu.svg';
 import money from './money.svg';
 import loader from './loader.svg';
 import thirdweb from './thirdweb.png';
+import user from './user.svg';
+import minimalistic from './minimalistic.svg';
+import iconuser from './iconuser.png';
 
 export {
   tagType,
@@ -28,4 +31,7 @@ export {
   money,
   loader,
   thirdweb,
+  user,
+  minimalistic,
+  iconuser,
 };
