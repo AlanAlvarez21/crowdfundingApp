@@ -21,11 +21,15 @@ const Home = () => {
   }, [address, contract])
 
   return (
-    <DisplayCampaigns 
-      title='All campaings'
-      isLoading={isLoading}
-      campaings={campaigns}
-    />
+    <div>
+      <DisplayCampaigns 
+        title='All campaings'
+        isLoading={isLoading}
+        campaings={campaigns}
+      />
+      <p className='font-normal text-left text-white font-epilogue mt-[15px]'> 2023 By @AlanAlvarez</p>
+    </div>
+  
   )
 }
 
