@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CustomButton } from './'
-import { logo, menu, iconuser, search } from '../assets'
+import { user, menu, iconuser, search, logout } from '../assets'
 import { navlinks } from '../constants'
 import { useStateContext } from '../context'
 
@@ -42,7 +42,9 @@ const Navbar = () => {
       {/* {Small Screen navigation} */}
       <div className="relative flex items-center justify-between sm:hidden">
         <div className="w-[60px] h-[60px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-          <img src={logo} alt="user" className="w-[60%] h-[60%] object-contain" />    
+          <Link to="/">
+            <img src={user} alt="user" className="w-[100%] h-[100%]" />    
+          </ Link>
         </div>
           <img 
             src={menu} 
@@ -70,6 +72,7 @@ const Navbar = () => {
                   <p className={`ml-[20px] font-epilogue font-semibold text-[14px] ${isActive === link.name ? 'text-[#1dc071]' : 'text-[#808191]' } `}>
                     {link.name}
                   </p>
+      
                 </li>
               ))}
             </ul>

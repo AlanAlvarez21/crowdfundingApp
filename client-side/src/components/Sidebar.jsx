@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { user, sun } from '../assets'
+import { user, sun, logout } from '../assets'
 import { navlinks } from '../constants'
 
 const Sidebar = () => {
@@ -22,7 +22,7 @@ const Sidebar = () => {
   return (
     <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh]">
       <Link to="/">
-        <Icon styles="w-[52px] h-[52px] bg-[#2c2f32] text-green-500" imgUrl={user} />
+        <Icon styles="w-[60px] h-[60px] bg-[#2c2f32]" imgUrl={user} />
       </Link>
 
       <div className="flex-1 flex flex-col justify-between items-center bg-[#1c1c24] rounded-[20px] w-[76px] py-4 mt-12">
@@ -42,7 +42,17 @@ const Sidebar = () => {
           ))}
         </div>
 
-        <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={sun} />
+        {/* TODO: Setup light mode on */}
+        {/* <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={sun} /> */}
+        {/* <Icon 
+          styles="bg-[#1c1c24] shadow-secondary" 
+          handleClick={() => {
+            setIsActive('/logout');
+            navigate('/logout');
+          }}
+          imgUrl={logout}
+          isActive={'false'} 
+        /> */}
       </div>
     </div>
   )
